@@ -31,7 +31,6 @@ namespace BowlingGameSpace
 
         private void LastTurn()
         {
-            int lastTurn = _numberOfFrames - 1;
             FrameStatus lastFrameType = gameFrames.Last.Value.GetFrameType();
 
             switch (lastFrameType)

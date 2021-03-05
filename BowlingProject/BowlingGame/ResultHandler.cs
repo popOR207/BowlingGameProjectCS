@@ -24,6 +24,7 @@ namespace BowlingGameSpace
                 finalResult += currentFrame.GetFirstRollResult() +
                     currentFrame.GetSecondRollResult() +
                     CalculateBonusPoints(currentFrame.GetFrameType(), currentNode);
+                currentNode = currentNode.Next;
             }
             return finalResult;
         }
