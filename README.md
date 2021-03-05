@@ -1,5 +1,5 @@
 # BowlingGameProjectCS
-Basic Bowling game, wrriten in C#. Was made as an exercise on C# design and code conventions.
+Basic Bowling game, wrriten in C#. Was made as an exercise on C#'s design and code conventions.
 
 Game workflow demands:
 
