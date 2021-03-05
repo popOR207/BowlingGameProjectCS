@@ -18,5 +18,5 @@ What i learned from this project:
 the project was written only in C#, which i had no prior experience with, but was really interesting to learn. c# presented me with new OOP abilities i was not familiar with, and new design concepts that can same a lot of unnecessary code. furthermore, the design process was really interesting, and every time i break down a program and try to rebild it i learn somthing new about correct, SOLID design; i had to find some creative solutions for setting the Frames and calculating the score in a way that will be seperated enough so the code will be maintainable and de-coupled, but not over-complicated.
 
 What i could improve:
-
-given the time, i would like to change some parts of the code that i feel are too 'index-oriented' - methods that needs to get relative access to Frames, by using a custom Collection for the Frames. i would also like make it into a multi-player game, supporting more the one player at a given time using a remote connection.
+given more time, i would like to make the code into a multi-player game, supporting more the one player at a given time using a remote connection.
+also, i would like to switch some of the current 'if/else'-dependent methods with a better, more maintainable design. 
