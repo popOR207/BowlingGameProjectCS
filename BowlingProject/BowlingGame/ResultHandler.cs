@@ -5,10 +5,10 @@ namespace BowlingGameSpace
 {
     class ResultHandler
     {
-        private List<IFrame> totalFrames;
+        private LinkedList<IFrame> totalFrames;
         private readonly int _numberOfFrames;
 
-        public ResultHandler(List<IFrame> totalFrames, int numOfFrames)
+        public ResultHandler(LinkedList<IFrame> totalFrames, int numOfFrames)
         {
             this._numberOfFrames = numOfFrames;
             this.totalFrames = totalFrames;
@@ -17,29 +17,27 @@ namespace BowlingGameSpace
         public int GetGameFinalScore()
         {
             int finalResult = 0;
-            int currentFrameIndex = 0;
+            LinkedListNode<IFrame> currentNode = totalFrames.First;
 
-            foreach (IFrame frame in totalFrames.Take(_numberOfFrames))
+            foreach (IFrame currentFrame in totalFrames.Take(_numberOfFrames))
             {
-                IFrame currentFrame = totalFrames[currentFrameIndex];            
                 finalResult += currentFrame.GetFirstRollResult() +
                     currentFrame.GetSecondRollResult() +
-                    CalculateBonusPoints(currentFrame.GetFrameType(), currentFrameIndex);
-                ++currentFrameIndex;
+                    CalculateBonusPoints(currentFrame.GetFrameType(), currentNode);
             }
             return finalResult;
         }
 
-        private int CalculateBonusPoints(FrameStatus frameType, int turn)
+        private int CalculateBonusPoints(FrameStatus frameType, LinkedListNode<IFrame> currentNode)
         {
             int addedBonus = 0;
             switch (frameType)
             {
                 case FrameStatus.Spare:
-                    addedBonus = totalFrames[turn + 1].GetFirstRollResult();
+                    addedBonus = currentNode.Next.Value.GetFirstRollResult();
                     break;
                 case FrameStatus.Strike:
-                    addedBonus = getStrikeBonus(turn);
+                    addedBonus = getStrikeBonus(currentNode);
                     break;
                 default:
                     break;
@@ -47,17 +45,17 @@ namespace BowlingGameSpace
             return addedBonus;
         }
 
-        private int getStrikeBonus(int currentTurn)
+        private int getStrikeBonus(LinkedListNode<IFrame> currentNode)
         {
-            int result = totalFrames[currentTurn + 1].GetFirstRollResult();
+            int result = currentNode.Next.Value.GetFirstRollResult();
 
-            if (totalFrames[currentTurn + 1].GetFrameType().Equals(FrameStatus.Strike))
+            if (currentNode.Next.Value.GetFrameType().Equals(FrameStatus.Strike))
             {
-                result += totalFrames[currentTurn + 2].GetFirstRollResult();
+                result += currentNode.Next.Next.Value.GetFirstRollResult();
             }
             else
             {
-                result += totalFrames[currentTurn + 1].GetSecondRollResult();
+                result += currentNode.Next.Value.GetSecondRollResult();
             }
             return result;
         }

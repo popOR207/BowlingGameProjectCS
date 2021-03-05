@@ -6,6 +6,7 @@ namespace BowlingGameSpace
     {
         private const int _numberOfFrames = 10;
         private GameRollsHandler gameHandler = new GameRollsHandler(_numberOfFrames);
+       
         public void StartGame()
         {
             gameHandler.StartGame();

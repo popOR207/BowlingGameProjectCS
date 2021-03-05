@@ -5,15 +5,15 @@ namespace BowlingGameSpace
 {
     class GameRollsHandler
     {
-        private List<IFrame> gameFrames = new List<IFrame>();
+        private LinkedList<IFrame> gameFrames = new LinkedList<IFrame>();
         private readonly int _numberOfFrames;
-
+        
         public GameRollsHandler(int numOfFrames)
         {
             this._numberOfFrames = numOfFrames;
             for (int i = 0; i < _numberOfFrames; ++i)
             {
-                gameFrames.Add(new Frame(FrameStatus.Normal));
+                gameFrames.AddFirst(new Frame(FrameStatus.Normal));
             }
         }
 
@@ -23,7 +23,7 @@ namespace BowlingGameSpace
             foreach (IFrame frame in gameFrames)
             {
                 Console.WriteLine($"turn { turnCount + 1} go!");
-                gameFrames[turnCount].Roll();
+                frame.Roll();
                 ++turnCount;
             }
             LastTurn();
@@ -32,13 +32,13 @@ namespace BowlingGameSpace
         private void LastTurn()
         {
             int lastTurn = _numberOfFrames - 1;
-            FrameStatus lastFrameType = gameFrames.FindLast(x => true).GetFrameType();
+            FrameStatus lastFrameType = gameFrames.Last.Value.GetFrameType();
 
             switch (lastFrameType)
             {
                 case FrameStatus.Strike:
                     AddExtraFrame(FrameStatus.LastStrike);
-                    if (gameFrames.FindLast(x=>true).GetFrameType() == FrameStatus.Strike)
+                    if (gameFrames.Last.Value.GetFrameType() == FrameStatus.Strike)
                     {
                         AddExtraFrame(FrameStatus.LastSpare);
                     }
@@ -55,10 +55,10 @@ namespace BowlingGameSpace
         {
             IFrame frame = new Frame(frameType);
             frame.Roll();
-            gameFrames.Add(frame);
+            gameFrames.AddLast(frame);
         }
 
-        public List<IFrame> GetGameFrameList()
+        public LinkedList<IFrame> GetGameFrameList()
         {
             return gameFrames;
         }
