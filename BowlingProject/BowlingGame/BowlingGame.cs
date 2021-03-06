@@ -6,12 +6,9 @@ namespace BowlingGameSpace
     {
         private const int _numberOfFrames = 10;
         private GameRollsHandler gameHandler;
-        private readonly IUserInput userInputHandler;
-
     
         public BowlingGame(IUserInput userInputHandler)
         {
-            this.userInputHandler = userInputHandler;
             gameHandler = new GameRollsHandler(_numberOfFrames, userInputHandler);
         }
 
