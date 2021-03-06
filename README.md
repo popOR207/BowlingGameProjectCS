@@ -22,5 +22,5 @@ i also learned a lot about how to test User-input based programs by utilizing an
 
 What i could improve:
 
-given more time, i would like to make the code into a multi-player game, supporting more the one player at a given time using a remote connection.
+given more time, i would like to make the code into a multi-player game, supporting more then one player at a given time using a remote connection.
 also, i would like to switch some of the current 'if/else'-dependent methods with a better, more maintainable design. 
