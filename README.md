@@ -17,8 +17,8 @@ finallly, the 'GetFinalScore' will return an int with the final score (max of 30
 
 What i learned from this project:
 
-the project was written only in C#, which i had no prior experience with, but was really interesting to learn. c# presented me with new OOP abilities i was not familiar with, and new design concepts that can eliminate a lot of unnecessary code. furthermore, the design process was a neat experience, and every time i break down a program and try to rebuild it i learn somthing new about correct, SOLID design; i had to find some creative solutions for setting the Frames and calculating the score in a way that will be seperated enough so the code will be maintainable and de-coupled, but not over-complicated.
-i also learned a lot about how to test User-input based programs by utilizing an interface dedicated for inputs.
+the project was written only in C#, which i had no prior experience with, but was really interesting to learn; especially some of c#'s concepts that can eliminate a lot of unnecessary code. furthermore, the design process was a neat experience, and every time i break down a program and try to rebuild it i learn somthing new about correct, SOLID design; i had to find some creative solutions for setting the Frames and calculating the score in a way that will be seperated enough so the code will be maintainable and de-coupled, but not over-complicated.
+i also learned a lot about how to test User-input based programs, which lead to a lot of other interesting discoveries.
 
 What i could improve:
 
