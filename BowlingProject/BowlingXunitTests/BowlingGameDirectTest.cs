@@ -6,7 +6,7 @@ using System;
 
 namespace BowlingXunitTests
 {
-    public class ResultHandlerTests
+    public class BowlingGameDirectTest
     {
         private readonly int _numberOfFrames = 10;
 
@@ -32,6 +32,8 @@ namespace BowlingXunitTests
             int[] arr5 = { 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 5, 5, 2, 2 };
             ResultHandler resultHandler5 = new ResultHandler(SetListForTest(arr5, _numberOfFrames), _numberOfFrames);
             Assert.True(resultHandler5.GetGameFinalScore() == 241);
+
+
         }
 
 

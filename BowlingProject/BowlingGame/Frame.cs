@@ -8,7 +8,6 @@ namespace BowlingGameSpace
         private int firstRollResult;
         private int secondRollResult;
 
-
         public int FirstRollResult {get{ return firstRollResult;} set { firstRollResult = value;}}
         public int SecondRollResult {get{return secondRollResult; } set {secondRollResult = value; }}
         public FrameStatus FrameType {get{return frameType;}set{frameType = value;}}

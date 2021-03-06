@@ -20,7 +20,12 @@ namespace BowlingGameSpace
             }
         }
 
-        public void StartGame()
+        internal LinkedList<IFrame> GetGameFrameList()
+        {
+            return gameFrames;
+        }
+
+        internal void StartGame()
         {
             int turnCount = 0;
             foreach (IFrame frame in gameFrames)
@@ -61,23 +66,15 @@ namespace BowlingGameSpace
             SetFrameRolls(frame);
         }
 
-        public LinkedList<IFrame> GetGameFrameList()
-        {
-            return gameFrames;
-        }
-
-
         private void SetFrameRolls(IFrame currentFrame)
         {
 
             if (currentFrame.FrameType.Equals(FrameStatus.Normal))
             {
-                Console.WriteLine($"got here normal {currentFrame.FrameType}");
                 NormalFrameRoll(currentFrame);
             }
             else
             {
-                Console.WriteLine("got here");
                 LastFrameRoll(currentFrame);
             }
         }

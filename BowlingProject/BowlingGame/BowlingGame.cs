@@ -17,7 +17,7 @@ namespace BowlingGameSpace
             gameHandler.StartGame();
         }
 
-        public int GameTotalScore()
+        public int GetGameFinalScore() //internal for release, public for test
         {
             ResultHandler resultHandler = new ResultHandler(gameHandler.GetGameFrameList(), _numberOfFrames);
             return resultHandler.GetGameFinalScore();
@@ -27,7 +27,7 @@ namespace BowlingGameSpace
         {
             BowlingGame game = new BowlingGame(new UserInput());
             game.StartGame();
-            int result = game.GameTotalScore();
+            int result = game.GetGameFinalScore();
             Console.WriteLine("Ginal game result is: " + result);
         }
     }
