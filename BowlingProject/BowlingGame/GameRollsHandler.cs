@@ -24,7 +24,7 @@ namespace BowlingGameSpace
             int turnCount = 0;
             foreach (IFrame frame in gameFrames)
             {
-                Console.WriteLine($"turn { turnCount + 1} go!");
+                Console.WriteLine($"Frame { turnCount + 1} - roll.");
                 frame.Roll();
                 ++turnCount;
             }

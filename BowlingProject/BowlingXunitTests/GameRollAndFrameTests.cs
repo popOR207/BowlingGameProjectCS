@@ -28,9 +28,17 @@ namespace BowlingXunitTests
             Assert.True(frame4.GetFirstRollResult() == 1);
             Assert.True(frame4.GetSecondRollResult() == 2);
 
-            Frame frame5 = new Frame(FrameStatus.Normal, new TestPreSetInput('a', 2));
+            Frame frame5 = new Frame(FrameStatus.Normal, new TestPreSetInput('a', 2));      
             frame5.Roll();
             Assert.False(frame5.GetFirstRollResult() == 'a');
+
+            Frame frame6 = new Frame(FrameStatus.Normal, new TestPreSetInput('~', 2));      
+            frame6.Roll();
+            Assert.False(frame6.GetFirstRollResult() == '~');
+
+            Frame frame7 = new Frame(FrameStatus.Normal, new TestPreSetInput(800000, 2));   //overflow
+            frame7.Roll();
+            Assert.False(frame7.GetFirstRollResult() == 800000);
         }
 
         [Fact]

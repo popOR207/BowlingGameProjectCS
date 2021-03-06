@@ -77,7 +77,7 @@ namespace BowlingGameSpace
         private int RollResult()
         {
             int throwRange = _maxRoll - firstRollResult;
-            int returnResult = 0;
+            int returnResult;
             do
             {
                 Console.WriteLine($"Choose a number between 0 - {throwRange}" );

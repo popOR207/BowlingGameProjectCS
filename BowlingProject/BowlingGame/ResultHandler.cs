@@ -25,7 +25,6 @@ namespace BowlingGameSpace
                 finalResult += currentFrame.GetFirstRollResult() +
                     currentFrame.GetSecondRollResult() +
                     CalculateBonusPoints(currentFrame.GetFrameType(), currentNode);
-                Console.WriteLine(finalResult);
                 currentNode = currentNode.Next;
             }
             return finalResult;
@@ -48,7 +47,7 @@ namespace BowlingGameSpace
             return addedBonus;
         }
 
-        internal int GetStrikeBonus(LinkedListNode<IFrame> currentNode)
+        private int GetStrikeBonus(LinkedListNode<IFrame> currentNode)
         {
             int result = currentNode.Next.Value.GetFirstRollResult();
 

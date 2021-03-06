@@ -28,7 +28,7 @@ namespace BowlingGameSpace
             BowlingGame game = new BowlingGame(new UserInput());
             game.StartGame();
             int result = game.GameTotalScore();
-            Console.WriteLine("game final result is: " + result);
+            Console.WriteLine("Ginal game result is: " + result);
         }
     }
 
