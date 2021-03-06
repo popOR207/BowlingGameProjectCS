@@ -26,7 +26,7 @@ namespace BowlingGameSpace
             foreach (IFrame frame in gameFrames)
             {
                 Console.WriteLine($"Frame { turnCount + 1} - roll.");
-                setFrameRolls(frame);
+                SetFrameRolls(frame);
                 ++turnCount;
             }
             LastTurn();
@@ -42,6 +42,7 @@ namespace BowlingGameSpace
                     AddExtraFrame(FrameStatus.LastStrike);
                     if (gameFrames.Last.Value.FrameType == FrameStatus.Strike)
                     {
+                        Console.WriteLine("last spare added");
                         AddExtraFrame(FrameStatus.LastSpare);
                     }
                     break;
@@ -56,8 +57,8 @@ namespace BowlingGameSpace
         private void AddExtraFrame(FrameStatus frameType)
         {
             IFrame frame = new Frame(frameType);
-            setFrameRolls(frame);
             gameFrames.AddLast(frame);
+            SetFrameRolls(frame);
         }
 
         public LinkedList<IFrame> GetGameFrameList()
@@ -66,15 +67,17 @@ namespace BowlingGameSpace
         }
 
 
-        private void setFrameRolls(IFrame currentFrame)
+        private void SetFrameRolls(IFrame currentFrame)
         {
 
             if (currentFrame.FrameType.Equals(FrameStatus.Normal))
             {
+                Console.WriteLine($"got here normal {currentFrame.FrameType}");
                 NormalFrameRoll(currentFrame);
             }
             else
             {
+                Console.WriteLine("got here");
                 LastFrameRoll(currentFrame);
             }
         }
