@@ -22,9 +22,9 @@ namespace BowlingGameSpace
 
             foreach (IFrame currentFrame in totalFrames.Take(_numberOfFrames))
             {
-                finalResult += currentFrame.GetFirstRollResult() +
-                    currentFrame.GetSecondRollResult() +
-                    CalculateBonusPoints(currentFrame.GetFrameType(), currentNode);
+                finalResult += currentFrame.FirstRollResult +
+                    currentFrame.SecondRollResult +
+                    CalculateBonusPoints(currentFrame.FrameType, currentNode);
                 currentNode = currentNode.Next;
             }
             return finalResult;
@@ -36,7 +36,7 @@ namespace BowlingGameSpace
             switch (frameType)
             {
                 case FrameStatus.Spare:
-                    addedBonus = currentNode.Next.Value.GetFirstRollResult();
+                    addedBonus = currentNode.Next.Value.FirstRollResult;
                     break;
                 case FrameStatus.Strike:
                     addedBonus = GetStrikeBonus(currentNode);
@@ -49,15 +49,15 @@ namespace BowlingGameSpace
 
         private int GetStrikeBonus(LinkedListNode<IFrame> currentNode)
         {
-            int result = currentNode.Next.Value.GetFirstRollResult();
+            int result = currentNode.Next.Value.FirstRollResult;
 
-            if (currentNode.Next.Value.GetFrameType().Equals(FrameStatus.Strike))
+            if (currentNode.Next.Value.FrameType.Equals(FrameStatus.Strike))
             {
-                result += currentNode.Next.Next.Value.GetFirstRollResult();
+                result += currentNode.Next.Next.Value.FirstRollResult;
             }
             else
             {
-                result += currentNode.Next.Value.GetSecondRollResult();
+                result += currentNode.Next.Value.SecondRollResult;
             }
             return result;
         }

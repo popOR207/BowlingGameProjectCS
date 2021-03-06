@@ -9,67 +9,74 @@ namespace BowlingXunitTests
         [Fact]
         public void NormaStatuslRollTest()
         {
-            Frame frame1 = new Frame(FrameStatus.Normal, new TestPreSetInput(10, 0));
-            frame1.Roll();
-            Assert.True(frame1.GetFirstRollResult() == 10);
-            Assert.True(frame1.GetSecondRollResult() == 0);
+            IFrame frame1 = new Frame(FrameStatus.Normal);
+            SetFrameValues(frame1, 10, 0);
 
-            Frame frame2 = new Frame(FrameStatus.Normal, new TestPreSetInput(10, 10));
-            frame2.Roll();
-            Assert.True(frame2.GetFirstRollResult() == 10);
-            Assert.False(frame2.GetSecondRollResult() == 10);
+            Assert.True(frame1.FirstRollResult == 10);
+            Assert.True(frame1.SecondRollResult == 0);
 
-            Frame frame3 = new Frame(FrameStatus.Normal, new TestPreSetInput(-54, 10));
-            frame3.Roll();
-            Assert.False(frame3.GetFirstRollResult() == -54);
+            IFrame frame2 = new Frame(FrameStatus.Normal);
+            SetFrameValues(frame2, 10, 10);
 
-            Frame frame4 = new Frame(FrameStatus.Normal, new TestPreSetInput(1, 2));
-            frame4.Roll();
-            Assert.True(frame4.GetFirstRollResult() == 1);
-            Assert.True(frame4.GetSecondRollResult() == 2);
+            Assert.True(frame2.FirstRollResult == 10);
+            Assert.False(frame2.SecondRollResult == 10);
 
-            Frame frame5 = new Frame(FrameStatus.Normal, new TestPreSetInput('a', 2));      
-            frame5.Roll();
-            Assert.False(frame5.GetFirstRollResult() == 'a');
+            IFrame frame3 = new Frame(FrameStatus.Normal);
+            SetFrameValues(frame3, -54, 10);
+            Assert.False(frame3.FirstRollResult == -54);
 
-            Frame frame6 = new Frame(FrameStatus.Normal, new TestPreSetInput('~', 2));      
-            frame6.Roll();
-            Assert.False(frame6.GetFirstRollResult() == '~');
+            IFrame frame4 = new Frame(FrameStatus.Normal);
+            SetFrameValues(frame4, 1, 2);
+            Assert.True(frame4.FirstRollResult == 1);
+            Assert.True(frame4.SecondRollResult == 2);
 
-            Frame frame7 = new Frame(FrameStatus.Normal, new TestPreSetInput(800000, 2));   //overflow
-            frame7.Roll();
-            Assert.False(frame7.GetFirstRollResult() == 800000);
+            IFrame frame5 = new Frame(FrameStatus.Normal);
+            SetFrameValues(frame5, 'a', 10);
+            Assert.False(frame5.FirstRollResult == 'a');
+
+            IFrame frame6 = new Frame(FrameStatus.Normal);
+            SetFrameValues(frame6, '~', 2);
+            Assert.False(frame6.FirstRollResult == '~');
+
+            IFrame frame7 = new Frame(FrameStatus.Normal);   //overflow
+            SetFrameValues(frame7, 888800000, 2);
+            Assert.False(frame7.FirstRollResult == 888800000);
+
+            IFrame frame8 = new Frame(FrameStatus.LastSpare);
+            SetFrameValues(frame8, 5, 2);
+            Assert.True(frame8.FirstRollResult == 5);
+
+            IFrame frame9 = new Frame(FrameStatus.LastSpare);
+            SetFrameValues(frame9, 10, 0);
+            Assert.True(frame9.FirstRollResult == 10);
+
         }
+
+        
 
         [Fact]
         public void LastSpareFramelRollTest()
         {
-            Frame frame1 = new Frame(FrameStatus.LastSpare, new TestPreSetInput(5, 0));
-            frame1.Roll();
-            Assert.True(frame1.GetFirstRollResult() == 5);
-
-            Frame frame2 = new Frame(FrameStatus.LastSpare, new TestPreSetInput(10, 0));
-            frame2.Roll();
-            Assert.True(frame2.GetFirstRollResult() == 10);
+            
         }
 
         [Fact]
         public void LastStrikeFramelRollTest()
         {
-            Frame frame1 = new Frame(FrameStatus.LastStrike, new TestPreSetInput(5, 2));
-            frame1.Roll();
-            Assert.True(frame1.GetFirstRollResult() == 5);
-            Assert.True(frame1.GetSecondRollResult() == 2);
+            IFrame frame1 = new Frame(FrameStatus.LastStrike);
+            SetFrameValues(frame1, 5, 2);
+            Assert.True(frame1.FirstRollResult == 5);
+            Assert.True(frame1.SecondRollResult == 2);
 
-            Frame frame2 = new Frame(FrameStatus.LastStrike, new TestPreSetInput(10, 0));
-            frame2.Roll();
-            Assert.True(frame2.GetFirstRollResult() == 10);
-            Assert.True(frame2.GetSecondRollResult() == 0);
+            IFrame frame2 = new Frame(FrameStatus.LastStrike);
+            SetFrameValues(frame2, 10, 0);
+            Assert.True(frame2.FirstRollResult == 10);
+            Assert.True(frame2.SecondRollResult == 0);
 
-            Frame frame3 = new Frame(FrameStatus.LastStrike, new TestPreSetInput(0, 0));
-            frame3.Roll();
-            Assert.True(frame3.GetFirstRollResult() == 0);
-            Assert.True(frame3.GetSecondRollResult() == 0);
+            IFrame frame3 = new Frame(FrameStatus.LastStrike);
+            SetFrameValues(frame3, 0, 0);
+            Assert.True(frame3.FirstRollResult == 0);
+            Assert.True(frame3.SecondRollResult == 0);
 
         }
 
@@ -92,30 +99,13 @@ namespace BowlingXunitTests
             GameRollsHandler g1 = new GameRollsHandler(10, new UserInput());
         }
 
-        [Fact]
-        public void correctRollsSetTest()
+   
+        public void SetFrameValues(IFrame frame, int a, int b)
         {
-            int[] arr = { 10, 0, 4, 4, 5, 4, 2, 2, 4, 6, 10, 0, 0, 0, 0, 10, 2, 2, 1, 8 };
-            LinkedList<IFrame> fl1 = new LinkedList<IFrame>();
-            int i = 0;
-            for (int k = 0; k < 10; ++k)
-            {
-                fl1.AddLast(new Frame(FrameStatus.Normal, new TestPreSetInput(arr[i], arr[i + 1])));
-                i += 2;
-            }
+            UserInput ui = new UserInput();
 
-            foreach (IFrame frame in fl1)
-            {
-                frame.Roll();
-            }
-
-            i = 0;
-            foreach (IFrame frame in fl1)
-            {
-                Assert.True(frame.GetFirstRollResult() == arr[i]);
-                Assert.True(frame.GetSecondRollResult() == arr[i + 1]);
-                i += 2;
-            }
+            frame.FirstRollResult = ui;
+            frame.SecondRollResult = b;
         }
     }
 }

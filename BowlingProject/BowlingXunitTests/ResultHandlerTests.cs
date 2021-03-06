@@ -8,7 +8,7 @@ namespace BowlingXunitTests
 {
     public class ResultHandlerTests
     {
-        private int _numberOfFrames = 10;
+        private readonly int _numberOfFrames = 10;
 
         [Fact]
         public void FinalResultNoFinalBonuseCalculationTest()
@@ -69,16 +69,28 @@ namespace BowlingXunitTests
             int i = 0;
             for (int k = 0; k < numOfFrames; ++k)
             {
-                fl.AddLast(new Frame(FrameStatus.Normal, new TestPreSetInput(arr[i], arr[i + 1])));
+                Frame frame = new Frame(FrameStatus.Normal);
+                SetFrameValues(frame, arr[i], arr[i + 1]);
+                 if (10 == arr[i])
+                {
+                    ((IFrame)frame).FrameType = FrameStatus.Strike;
+                } 
+                 else if (10 == arr[i] + arr[i +1])
+                {
+                    ((IFrame)frame).FrameType = FrameStatus.Spare;
+                }
+                fl.AddLast(frame);
+
                 i += 2;
             }
 
-            foreach (IFrame frame in fl)
-            {
-                frame.Roll();
-            }
-
             return fl;
+        }
+
+        public void SetFrameValues(IFrame frame, int a, int b)
+        {
+            frame.FirstRollResult = a;
+            frame.SecondRollResult = b;
         }
     }
 }

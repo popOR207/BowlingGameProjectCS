@@ -3,10 +3,10 @@ namespace BowlingGameSpace
 {
     public interface IFrame
     {
-        public int GetFirstRollResult();
-        public int GetSecondRollResult();
-        public FrameStatus GetFrameType();
-        public void Roll();
+        public int FirstRollResult { get; set; }
+        public int SecondRollResult { get; set; }
+        public FrameStatus FrameType { get; set; }
+        // public void Roll();
     }
 
     public enum FrameStatus
