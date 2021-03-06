@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace BowlingGameSpace
 {
-    class ResultHandler
+    public class ResultHandler
     {
         private LinkedList<IFrame> totalFrames;
         private readonly int _numberOfFrames;
@@ -24,6 +25,7 @@ namespace BowlingGameSpace
                 finalResult += currentFrame.GetFirstRollResult() +
                     currentFrame.GetSecondRollResult() +
                     CalculateBonusPoints(currentFrame.GetFrameType(), currentNode);
+                Console.WriteLine(finalResult);
                 currentNode = currentNode.Next;
             }
             return finalResult;
@@ -38,7 +40,7 @@ namespace BowlingGameSpace
                     addedBonus = currentNode.Next.Value.GetFirstRollResult();
                     break;
                 case FrameStatus.Strike:
-                    addedBonus = getStrikeBonus(currentNode);
+                    addedBonus = GetStrikeBonus(currentNode);
                     break;
                 default:
                     break;
@@ -46,7 +48,7 @@ namespace BowlingGameSpace
             return addedBonus;
         }
 
-        private int getStrikeBonus(LinkedListNode<IFrame> currentNode)
+        internal int GetStrikeBonus(LinkedListNode<IFrame> currentNode)
         {
             int result = currentNode.Next.Value.GetFirstRollResult();
 

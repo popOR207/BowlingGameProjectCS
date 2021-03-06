@@ -2,15 +2,18 @@
 
 namespace BowlingGameSpace
 {
-    class Frame : IFrame
+    public class Frame : IFrame
     {
         private FrameStatus frameType;
+        private const int _maxRoll = 10;
         public int firstRollResult = 0;
         private int secondRollResult = 0;
-        private const int _maxRoll = 10;
-        public Frame(FrameStatus frameType)
+        private readonly IUserInput UserInputHandler;
+
+        public Frame(FrameStatus frameType, IUserInput UserInputHandler)
         {
             this.frameType = frameType;
+            this.UserInputHandler = UserInputHandler;
         }
 
         public int GetFirstRollResult()
@@ -78,15 +81,7 @@ namespace BowlingGameSpace
             do
             {
                 Console.WriteLine($"Choose a number between 0 - {throwRange}" );
-                try
-                {
-                    returnResult = Int32.Parse(Console.ReadLine());
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("Not a valid input" + e);
-                    returnResult = -1;
-                }
+                returnResult = UserInputHandler.GetUserInput();
             }
             while (returnResult < 0 || returnResult > throwRange);
             return returnResult;

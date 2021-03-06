@@ -3,17 +3,19 @@ using System.Collections.Generic;
 
 namespace BowlingGameSpace
 {
-    class GameRollsHandler
+    public class GameRollsHandler
     {
         private LinkedList<IFrame> gameFrames = new LinkedList<IFrame>();
         private readonly int _numberOfFrames;
-        
-        public GameRollsHandler(int numOfFrames)
+        private readonly IUserInput userInputHandler;
+
+        public GameRollsHandler(int numOfFrames, IUserInput userInputHandler)
         {
+            this.userInputHandler = userInputHandler;
             this._numberOfFrames = numOfFrames;
             for (int i = 0; i < _numberOfFrames; ++i)
             {
-                gameFrames.AddFirst(new Frame(FrameStatus.Normal));
+                gameFrames.AddFirst(new Frame(FrameStatus.Normal, userInputHandler));
             }
         }
 
@@ -52,7 +54,7 @@ namespace BowlingGameSpace
 
         private void AddExtraFrame(FrameStatus frameType)
         {
-            IFrame frame = new Frame(frameType);
+            IFrame frame = new Frame(frameType, userInputHandler);
             frame.Roll();
             gameFrames.AddLast(frame);
         }

@@ -2,11 +2,19 @@
 
 namespace BowlingGameSpace
 {
-    class BowlingGame
+    public class BowlingGame
     {
         private const int _numberOfFrames = 10;
-        private GameRollsHandler gameHandler = new GameRollsHandler(_numberOfFrames);
-       
+        private GameRollsHandler gameHandler;
+        private readonly IUserInput userInputHandler;
+
+    
+        public BowlingGame(IUserInput userInputHandler)
+        {
+            this.userInputHandler = userInputHandler;
+            gameHandler = new GameRollsHandler(_numberOfFrames, userInputHandler);
+        }
+
         public void StartGame()
         {
             gameHandler.StartGame();
@@ -20,7 +28,7 @@ namespace BowlingGameSpace
 
         static void Main(string[] args)
         {
-            BowlingGame game = new BowlingGame();
+            BowlingGame game = new BowlingGame(new UserInput());
             game.StartGame();
             int result = game.GameTotalScore();
             Console.WriteLine("game final result is: " + result);

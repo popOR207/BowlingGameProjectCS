@@ -1,7 +1,7 @@
 ﻿
 namespace BowlingGameSpace
 {
-    interface IFrame
+    public interface IFrame
     {
         public int GetFirstRollResult();
         public int GetSecondRollResult();
@@ -9,7 +9,7 @@ namespace BowlingGameSpace
         public void Roll();
     }
 
-    enum FrameStatus
+    public enum FrameStatus
     {
         Normal, Spare, Strike, LastSpare, LastStrike
     }
