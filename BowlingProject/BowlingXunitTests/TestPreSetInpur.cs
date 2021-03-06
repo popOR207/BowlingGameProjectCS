@@ -1,6 +1,12 @@
 ﻿
 using BowlingGameSpace;
 
+
+/* this class is only for testing,
+ * implementing the IUserInput for controlled
+ * pre-determined input
+ */
+
 namespace BowlingXunitTests
 {
     public class TestPreSetInput : IUserInput
