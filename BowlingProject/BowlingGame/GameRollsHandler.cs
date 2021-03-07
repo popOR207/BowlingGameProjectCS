@@ -44,15 +44,15 @@ namespace BowlingGameSpace
             switch (lastFrameType)
             {
                 case FrameStatus.Strike:
-                    AddExtraFrame(FrameStatus.LastStrike);
+                    AddExtraFrame(FrameStatus.Strike);
                     if (gameFrames.Last.Value.FrameType == FrameStatus.Strike)
                     {
                         Console.WriteLine("last spare added");
-                        AddExtraFrame(FrameStatus.LastSpare);
+                        AddExtraFrame(FrameStatus.Spare);
                     }
                     break;
                 case FrameStatus.Spare:
-                    AddExtraFrame(FrameStatus.LastSpare);
+                    AddExtraFrame(FrameStatus.Spare);
                     break;
                 default:
                     break;
@@ -100,11 +100,11 @@ namespace BowlingGameSpace
 
         private void LastFrameRoll(IFrame currentFrame)
         {
-            if (currentFrame.FrameType.Equals(FrameStatus.LastSpare))
+            if (currentFrame.FrameType.Equals(FrameStatus.Spare))
             {
                 currentFrame.FirstRollResult = RollResult(currentFrame);
             }
-            else if (currentFrame.FrameType.Equals(FrameStatus.LastStrike))
+            else if (currentFrame.FrameType.Equals(FrameStatus.Strike))
             {
                 NormalFrameRoll(currentFrame);
             }

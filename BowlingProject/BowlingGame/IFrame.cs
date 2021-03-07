@@ -10,6 +10,6 @@ namespace BowlingGameSpace
 
     public enum FrameStatus
     {
-        Normal, Spare, Strike, LastSpare, LastStrike
+        Normal, Spare, Strike
     }
 }
