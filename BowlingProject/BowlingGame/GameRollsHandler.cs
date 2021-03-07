@@ -6,9 +6,9 @@ namespace BowlingGameSpace
     public class GameRollsHandler
     {
         private LinkedList<IFrame> gameFrames = new LinkedList<IFrame>();
-        private readonly int _numberOfFrames;
-        private readonly int _maxRoll = 10;
         private readonly IUserInput userInputHandler;
+        private readonly int _numberOfFrames;
+        private const int _maxRoll = 10;
 
         public GameRollsHandler(int numOfFrames, IUserInput userInputHandler)
         {
@@ -77,7 +77,6 @@ namespace BowlingGameSpace
             gameFrames.AddLast(frame);
             SetFrameRolls(frame);
         }
-
 
         private void NormalFrameRoll(IFrame currentFrame)
         {
