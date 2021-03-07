@@ -59,16 +59,8 @@ namespace BowlingGameSpace
             }
         }
 
-        private void AddExtraFrame(FrameStatus frameType)
-        {
-            IFrame frame = new Frame(frameType);
-            gameFrames.AddLast(frame);
-            SetFrameRolls(frame);
-        }
-
         private void SetFrameRolls(IFrame currentFrame)
         {
-
             if (currentFrame.FrameType.Equals(FrameStatus.Normal))
             {
                 NormalFrameRoll(currentFrame);
@@ -78,6 +70,14 @@ namespace BowlingGameSpace
                 LastFrameRoll(currentFrame);
             }
         }
+
+        private void AddExtraFrame(FrameStatus frameType)
+        {
+            IFrame frame = new Frame(frameType);
+            gameFrames.AddLast(frame);
+            SetFrameRolls(frame);
+        }
+
 
         private void NormalFrameRoll(IFrame currentFrame)
         {

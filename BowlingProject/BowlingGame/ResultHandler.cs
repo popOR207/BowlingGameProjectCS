@@ -15,7 +15,8 @@ namespace BowlingGameSpace
             this.totalFrames = totalFrames;
         }
 
-        public int GetGameFinalScore()
+        // GetGameFinalScore : public for testing, internal for release
+        public int GetGameFinalScore()  
         {
             int finalResult = 0;
             LinkedListNode<IFrame> currentNode = totalFrames.First;
